@@ -1,4 +1,4 @@
-const { JSDOM } = require('jsdom');
+
 const axios = require('axios');
 const fs = require('fs').promises;
 const { translate } = require('@vitalets/google-translate-api');
