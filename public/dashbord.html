@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script>
+        var contact;
+        var d={};
+    </script>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    user-select:none;
+}
+
+body, html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    flex-direction:column;
+    background-attachment:fixed;
+}
+
+.dashboard-container {
+    background: white;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    animation: fadeIn 1s ease-in-out;
+    max-width: 95%;
+    
+}
+
+.dashboard-container h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.dashboard-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+    outline: none;
+    transition: border-color 0.3s;
+}
+.input-group select{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+    outline: none;
+    height: 40px;
+    transition: border-color 0.3s;
+}
+.input-group textarea{
+    width: 100%;
+    padding: 10px;
+    min-height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #9b59b6;
+}
+
+.input-group label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    pointer-events: none;
+    transition: all 0.3s;
+    color: #999;
+}
+.input-group span{
+    margin: 10px;
+    pointer-events: none;
+    color: #9b59b6;
+    font-size: 12px;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -20px;
+    left: 10px;
+    color: #9b59b6;
+    font-size: 12px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #9b59b6;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #8e44ad;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.img{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 50px;
+    display: block;
+    margin-left: calc(50% - 50px);
+    border-radius: 50%;
+}.chat{
+    width:100%;
+    background:#0000000d;
+    margin: 5px 0;
+    padding: 15px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+}
+.chat2 p:nth-child(2){
+    opacity:0.5;
+}
+.chat1 img{
+    width:40px;
+    margin-right:5px;
+    border-radius:50%;
+}
+.h1{
+    width:100%;
+    
+}
+.h1 img{
+    width:25px;
+    height:25px;
+    cursor:pointer;
+}
+.h1 div{
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+}
+.h2{
+    display:flex;
+    justify-content:space-around;
+    margin-top:20px;
+}
+.h2 div{
+    border-bottom:solid 3px transparent;
+    cursor:pointer;
+}
+.line{
+    width:100%;
+    height:5px;
+    border-radius:3px;
+    background:white;
+    margin:5px 0;
+}
+#chat{
+    height: 100vh;
+    overflow-y: auto;
+}
+.h1 input{
+    background-color:transparent;
+    border:none;
+    padding:5px;
+    font-size:15px;
+    width:100%;
+    border-bottom:solid 3px #9b59b6;
+    transition:0.5s;
+    outline:none;
+}
+.h1 input:disabled{
+    color:black;
+    border-bottom:solid 3px transparent;
+    
+}
+</style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <div class="h1">
+                <div>
+                    <input id="sin" value = "Thilina Kavishan" disabled />
+                    <img onclick="se(this)" src="/img/aero_ikon_aramaikon_08.png"/>
+                </div>
+            </div>
+            <div class="h2">
+                <div id="tagchat" onload="alert('hi')" onclick="chat(this)">chat</div>
+                <div id="tagsend" onclick="newc(this)">Send</div>
+                <div>Setting</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="line"></div>
+    <div id="chat" class="dashboard-container">
+        <h1>HI Thilina kavishan</h1>
+          <img class="img" src="https://i.ibb.co/Jx7b6mZ/Picsart-24-06-06-18-44-20-881.jpg" alt="">
+    </div>
+    <script>
+        d.chat = document.getElementById('chat');
+
+        
+        function chatload(data) {
+            
+            console.log(data)
+            const keys = Object.keys(data);
+    
+    
+    keys.forEach(key => {
+        let d1 = document.createElement('div');
+        d1.className = "chat";
+        d1.setAttribute('onclick', `newc2("${key.split('@')[0]}","${data[key].name || data[key].notify}")`);
+        d1.innerHTML = `<div class="chat1">
+               <img src="https://i.ibb.co/ctd233r/image.webp">
+            </div>
+            <div class="chat2">
+                <p>${data[key].name || data[key].notify}</p>           
+                <p>+${key.split('@')[0]}</p>
+            </div>`
+        d.chat.appendChild(d1);
+    });
+            
+        }
+        const r = new XMLHttpRequest();
+        //const f = new FormData();
+
+
+        //f.append('name', 'John Doe');
+        //f.append('email', 'john.doe@example.com');
+        r.open('POST', '/getcontct', true);
+
+        // Set up a function to handle the response
+        r.onload = function() {
+            if (r.status >= 200 && r.status < 300) {
+                contact = JSON.parse(r.responseText)
+                chatload(contact)
+            } else {
+                console.error('Error:', r.statusText);
+            }
+        };
+
+        // Send the request with the FormData object
+        r.send();
+
+
+
+
+        //tab
+        d.tab = 'chat';
+        //tag color
+        function tagc(tag) {
+            if(d.tag){
+                d.tag.style.borderBottom = 'solid 3px transparent';
+            }
+            tag.style.borderBottom = 'solid 3px #9b59b6';
+            d.tag = tag
+        }
+        d.chatht = `<label for="phone">Phone Number</label></div><div class="input-group"><span>Msg Type</span><br><br><select onchange="typechange(this)" id="options" name="type"><option value="text">Text</option><option value="media">Media</option><option value="file">File</option></select></div><div class="input-group"><span for="textInput">Enter message</span><textarea name="text" type="text" id="textInput" required></textarea></div>
+        <div id="furl" style="display:none;" class="input-group">
+          <input name="url" type="text" required><label for="url">Media Url</label></div><button type="button" onclick="sender(this)">Send</button></form>`
+        tagc(document.getElementById('tagchat'))
+        function newc(tag) {
+            tagc(tag)
+            d.tab = 'new';
+            d.chat.innerHTML = `<br>
+  <form id='sendf' class="dashboard-form">
+      <div class="input-group">
+          <input name="nb" type="tel" id="phone" required>`+d.chatht
+        }
+        function newc2(num,name) {
+            const tag = document.getElementById('tagsend')
+            tagc(tag)
+            d.tab = 'new';
+                    d.chat.innerHTML = `<br>
+            <p style="text-align: center;">${name}</p>
+            <br><br>
+          <form id='sendf' class="dashboard-form">
+              <div class="input-group">
+                  <input value="${num}" name="nb" type="tel" id="phone" required>`+d.chatht
+                }
+        function chat(tag) {
+            tagc(tag)
+            d.chat.innerHTML = '';
+            chatload(contact);
+        }
+        //search
+        function search(searchString) {
+            if (searchString.startsWith('0')) {
+                searchString = searchString.substring(1);
+            }
+            const result = {};
+
+            for (const [key, value] of Object.entries(contact)) {
+                if(value.name){
+                  if (value.name.toLowerCase().includes(searchString.toLowerCase()) 
+                     || value.id.split('@')[0].toLowerCase().includes(searchString.toLowerCase())) {
+                    result[value.id] = value;
+                      if(Object.keys(result).length > 10){
+                          break
+                      }
+                  }
+                }
+            }
+            d.chat.innerHTML = ''
+            return result;
+        }
+        d.in = true;
+        function se(tag) {
+            if(d.in){
+                d.sin = document.getElementById('sin');
+                console.log(tag)
+                d.sin.disabled = false;
+                tag.src = '/img/ic_close.png';
+                d.sin.value = '';
+                d.sin.focus();
+                d.sin.addEventListener('input',function() {
+                    if(d.sin.value.length > 0){
+                        chatload(search(d.sin.value));
+                    }else{
+                        chatload(contact);
+                    }
+                });
+                d.in = false
+            }else{
+                tag.src = '/img/aero_ikon_aramaikon_08.png';
+                d.sin.value = 'Thilina Kavishan';
+                d.sin.disabled = true;
+                chatload(contact);
+                d.in = true
+            }
+            
+        }
+
+        //msg send
+        function sender(tag) {
+            tag.innerHTML = 'Sending...';
+            const r1 = new XMLHttpRequest();
+            const form = document.getElementById('sendf');
+            const f = new FormData(form);
+
+            // Set up a function to handle the response
+            r1.onload = function() {
+                if (r1.status >= 200 && r1.status < 300) {
+                    const rdata = JSON.parse(r1.responseText);
+                    if(rdata.status == 'success'){
+                        tag.innerHTML = 'Done';
+                        setInterval(function name() {
+                            tag.innerHTML = 'Send';
+                        },2000)
+                        form.querySelector('textarea').value = '';
+                    }
+                } else {
+                    console.error('Error:', r1.statusText);
+                }
+            };
+
+            r1.open('POST', '/send', true);
+            r1.send(f);
+        }
+        function typechange(tag) {
+            const type = tag.value;
+            const furl = document.getElementById('furl')
+            if(type == 'media' || type == 'file'){
+                furl.style.display = 'unset';
+            }else{
+                furl.style.display = 'none';
+            }
+            
+        }
+
+        //console.log(result);
+    </script>
+</body>
+</html>
