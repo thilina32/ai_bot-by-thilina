@@ -77,9 +77,7 @@ async function helder(c, m, { jid, uid, group, formMe, text }) {
       });
     }else
     if ((!formMe && !group) || t2.split(" ")[0]=='.ai') {
-      if(t2.split(" ")[0]=='.ai'){
-        t2 = t2.slice(4);
-      }
+      
       if(!data.hasOwnProperty(uid)){
         data[uid] = {};
         data[uid]['lan'] = 'si'
@@ -100,6 +98,9 @@ async function helder(c, m, { jid, uid, group, formMe, text }) {
 
       try {
         let t3 = t2;
+        if(t2.split(" ")[0]=='.ai'){
+        t3 = t2.slice(4);
+        }
         c.sendPresenceUpdate('composing',jid)
         if(data[uid]['lan'] == 'si'){
           console.log('using sinhala')
@@ -176,7 +177,7 @@ async function helder(c, m, { jid, uid, group, formMe, text }) {
                 
       }]);
         console.log('send done');
-        c.sendPresenceUpdate('unavailable',jid)
+        c.sendPresenceUpdate('unavailable')
         
         
       } catch (error) {
