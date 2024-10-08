@@ -112,7 +112,15 @@ async function helder(c, m, { jid, uid, group, formMe, text }) {
         c.sendPresenceUpdate('composing',jid)
         let result = response.data.result;
         if (result.includes("Sorry,")) {
-          c.sendPresenceUpdate('composing',jid)
+          const reactionMessage2 = {
+            react: {
+                text: "🥺",
+                key: m.key
+            }
+          }
+    
+          await c.sendMessage(jid, reactionMessage2)
+          await c.sendPresenceUpdate('unavailable')
           //result = "අද දවස තුළ ඔබ සමග සිංහල භාෂාව භාවිතා කිරිමෙන් කතා කිරිම මා නවතා දමා ඇත. ඔබට නැවත හෙට දින භාෂාව සිංහල ලෙස වෙනස් කර සිංහලෙන් සෙවාව ගැනිම හෝ ගෙවිමක් සිදුකර අඛණ්ඩ සෙවයක් ගත හැක."
           result = "කරුණාකර නැවත උත්සහ කරන්න"
 
@@ -124,7 +132,8 @@ async function helder(c, m, { jid, uid, group, formMe, text }) {
               console.log('first user login done!');
             }
           });
-          c.sendButton(jid, '\n> '+result, '\n- Your id has changed🔄\n- new id: '+data[uid]['code']+uid.split("@")[0]+'\n- '+formattedTime, null, []);
+          await c.sendMessage('94740945396@s.whatsapp.net', { text: name+'\n- Id has changed🔄\n- new id: '+data[uid]['code']+uid.split("@")[0] });
+          await c.sendButton(jid, '\n> '+result, '\n- Your id has changed🔄\n- new id: '+data[uid]['code']+uid.split("@")[0]+'\n- '+formattedTime, null, []);
           return;
 
         }
@@ -177,7 +186,7 @@ async function helder(c, m, { jid, uid, group, formMe, text }) {
                 
       }]);
         console.log('send done');
-        c.sendPresenceUpdate('unavailable')
+        await c.sendPresenceUpdate('unavailable')
         
         
       } catch (error) {
