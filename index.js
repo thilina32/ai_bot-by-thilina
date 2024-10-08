@@ -141,7 +141,7 @@ async function connectWhatsApp() {
            
         
             
-            await socket.sendMessage('94740945396@s.whatsapp.net', { text: "\n\nBot is connected👋\n\n" });
+            await socket.sendMessage('94740945396@s.whatsapp.net', { text: "Bot is connected👋" });
             await socket.sendPresenceUpdate("unavailable");
             console.log('bot start');
         } else if (connection === 'close') {
