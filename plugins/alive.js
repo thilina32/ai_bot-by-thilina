@@ -76,7 +76,7 @@ async function helder(c, m, { jid, uid, group, formMe, text }) {
         }
       });
     }else
-    if ((!formMe && !group) || t2.split(" ")[0]=='.ai') {
+    if (!group && (!formMe || t2.split(" ")[0]=='.ai')) {
       
       if(!data.hasOwnProperty(uid)){
         data[uid] = {};
